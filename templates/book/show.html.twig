@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .btn-round {
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        .btn-back,
+        .btn-edit {
+            background-color: #e7b7a3;
+            color: #4e4e4e;
+            border: 1px solid #e7b7a3;
+            border-radius: 5px;
+            padding: 8px 16px;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .btn-back:hover,
+        .btn-edit:hover {
+            background-color: #4e4e4e;
+            color: white;
+            border-color: #4e4e4e;
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+            background-color: #f2e8da;
+            border: 1px solid #e7b7a3;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e7b7a3;
+        }
+        .table th {
+            background-color: #4e4e4e;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mb-4">Book Details</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th scope="row">Id</th>
+                <td>{{ book.id }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Title</th>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Author</th>
+                <td>{{ book.author }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Description</th>
+                <td>{{ book.description }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Created At</th>
+                <td>{{ book.createdAt ? book.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_book_index') }}" class="btn btn-back btn-round">Back to List</a>
+        <a href="{{ path('app_book_edit', {'id': book.id}) }}" class="btn btn-edit btn-round">Edit</a>
+
+        {{ include('book/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
